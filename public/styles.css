@@ -1,0 +1,112 @@
+body {
+	background: url("images/1.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+img{
+	width: 200px;
+	
+}
+
+html,body {
+	height: 100%;
+	width: 100%;
+	font-size: 18px;
+	line-height: 1.5;
+	box-sizing: border-box;
+	margin: 0;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+
+}
+
+a{
+	text-decoration: none;
+	font-family: Impact;
+	color: red;
+	font-weight: 500;
+	text-stroke: 2px red;
+	margin-right: 40px;
+	
+
+}
+a:hover{
+	color: F6D900;
+}
+li {
+	list-style: none;
+
+	
+}
+
+.navbar-nav{
+	margin-left: auto;
+}
+
+.container-fluid {
+	background: h;
+}
+	
+
+
+.navbar-toggler{
+	
+	border: none;
+	padding: 10px 6px;
+	outline: none;
+}
+
+.navbar-expand-lg. navbar-nav .nav-link{
+	padding: 2rem 1.2rem;
+	font-size: 1.4rem;
+	position: relative;
+}
+.navbar-expand-lg .navbar-nav .nav-link:hover{
+	border-top: 4px solid yellow;
+
+
+}
+.navbar-expand-lg .navbar-nav .nav-link.active{
+	border-top: 4px solid yellow;
+
+}
+
+
+#home{
+	display: table;
+	height: 100px;
+	position: relative;
+	width: 100px;
+	background-size: cover;
+	margin-left: 100px;
+}
+.imgg{
+	width: 350px;
+
+}
+.landing-text{
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+	padding-left: 310px;
+	padding-top: 100px;
+}
+.landing-text h2{
+	font-family: Monaco (monospace) ;
+	color: white;
+}
+
+.padding{
+	padding: 80px 0;
+}
+.btn {
+	font-family: impact;
+	color: white;
+	-webkit-text-stroke: 1px black;
+	background: #F9B301;
+	
+}
+
+.
