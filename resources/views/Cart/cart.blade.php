@@ -210,7 +210,7 @@ $("#foodselection").change(function(){
         $("#table").show()
     }
 })
-
+ 
 $("#orderForm").submit(function(e){
     if($("#foodselection").val() == 'dinein' && $("#table").val() == null){
         e.preventDefault();
