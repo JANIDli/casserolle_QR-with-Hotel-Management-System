@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->text('cart_items')->default(null);
             $table->integer('total')->default(0);
-            $table->integer('table_number');
+            $table->integer('table_number')->nullable();
             $table->boolean('dinein')->default(true);
             $table->boolean('takeaway')->default(false);
             $table->text('comment');

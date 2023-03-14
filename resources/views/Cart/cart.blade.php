@@ -105,7 +105,7 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="mb-3"><h3>Your Order</h3></div>
-                            <form action="/order/new" method="POST">
+                            <form action="/order/new" method="POST" id="orderForm">
                                 @csrf
                                 <div class="form-group">
                                 <select id="foodselection" onchange="hideElement()" class="form-control" name="order_type">
@@ -115,9 +115,9 @@
                                 </div>
 
                                 <div class="form-group" id="myElement">
-                                  <select id="" class="form-control" name="table_number" type="number">
+                                  <select id="table" class="form-control" name="table_number" type="number" required>
                                     <option selected disabled>Select Table</option>
-                                    <option value="1">Tabele 01</option>
+                                    <option value="1">Table  01</option>
                                     <option value="2">Table  02</option>
                                     <option value="3">Table  03</option>
                                     <option value="4">Table  04</option>
@@ -143,7 +143,7 @@
                                 
                                 <div class="form-group mt-3">
                                     <label for="comment">Comment:</label>
-                                    <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                                    <textarea class="form-control" rows="5" id="comment" name="comment" required></textarea>
                                   </div>
                                   
                                   <div class="d-flex align-items-center justify-content-between mt-3 border-bottom pb-2">
@@ -190,17 +190,33 @@ function hideElement() {
     var element = document.getElementById("myElement");
 
     if (selection.value === "TakeAway") {
-      element.style.display = "none";
+        element.style.display = "none";
     } else {
-      element.style.display = "block";
+        element.style.display = "block";
     }
-  }
+}
+
 let total = 0;
- $(".item-price").each(function(){
+$(".item-price").each(function(){
     total = total + parseInt($(this).text())
- })
- $("#total").text(total+'/=')
- $("#total-inp").val(total)
+})
+$("#total").text(total+'/=')
+$("#total-inp").val(total)
+
+$("#foodselection").change(function(){
+    if($(this).val() == 'takeaway'){
+        $("#table").hide()
+    }else{
+        $("#table").show()
+    }
+})
+
+$("#orderForm").submit(function(e){
+    if($("#foodselection").val() == 'dinein' && $("#table").val() == null){
+        e.preventDefault();
+        alert('Please select table number')
+    }
+})
 </script>
 </body>
 </html>
