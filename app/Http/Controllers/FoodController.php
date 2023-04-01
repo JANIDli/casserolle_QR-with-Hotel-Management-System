@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Food;
 
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class FoodController extends Controller
 {
@@ -19,7 +20,12 @@ class FoodController extends Controller
             "price" => $request->price,
             "image" => $fileName
         ];
-        Food::create($data);
+
+        $food = Food::create($data);
+        $qr_name = "".str_replace(' ', '', $food->name)."_".$food->id."";
+
+        QrCode::format('png')->size(200)->generate(''.$food->id.'',"".public_path('qrs')."/".$qr_name.".png");
+        Food::where('id',$food->id)->update(['qr' => $qr_name]);
 
 		return redirect()->back();
     }

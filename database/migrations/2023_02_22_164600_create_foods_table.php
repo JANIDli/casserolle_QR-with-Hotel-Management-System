@@ -19,6 +19,7 @@ return new class extends Migration
 			$table->integer('menu_id');
             $table->text('description');
             $table->integer('price');
+            $table->text('qr')->nullable();
             $table->text('image');
             $table->timestamps();
         });

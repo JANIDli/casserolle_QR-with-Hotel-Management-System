@@ -30,10 +30,10 @@ use App\Http\Controllers\CartController;
 Route::group(['namespace' => 'App\Http\Controllers'], function(){
     //Admin routes
     Route::get('/additeam','AdminController@index')->middleware('auth'); // this is a add iteam page
-
     Route::get('/admin','AdminNewController@show')->middleware('auth');  // new Admin Dashboard Route 
-
-    
+    Route::get('/admin/all','AdminNewController@all')->middleware('auth')->name('admin.all');
+    //QR CODES
+    Route::get('/qr','QrCodeController@qr');
 
     //Menu
     Route::post('/menu/create','MenuController@store');
