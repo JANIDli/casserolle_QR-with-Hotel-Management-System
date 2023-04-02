@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -9,12 +11,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Admin</title>
     <style>
+    
+        @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Lato:wght@400;900&display=swap');
+
         .logo{
             margin-left:80px;
         }
         body{
             background-color: #F1F3F4;
         }
+        .card-body{
+          text-align: center
+        }
+        .card-body{
+          box-shadow:5px 30px 30px  rgb(38, 43, 88)
+          
+        }
+        .page-header h5{
+          font-weight: bold;
+        }
+        
     </style>
 </head>
 <body>
@@ -63,71 +79,71 @@
         </div>
       </nav>
       <div class="page-header" style="margin-top: 10px; margin-bottom: -35px; margin-top:70px;">
-        <h5 style="text-align: center;">Admin Dashboard</h5>
+        <h5 style="text-align: center; font-size:30px; margin-top:-60px;">ADMIN DASHBOARD</h5>
       </div>
-
+<br>
       <section id="dashboard" class="container mt-5">
         <div class="row">
           <div class="col-sm-6 col-lg-3 mb-3">
-            <div class="card" style=" background-color: rgba(0, 0, 0, 0.2);">
-              <div class="card-body">
+            <div class="card" style="background-color: rgba(0, 0, 0, 0.2);">
+              <button class="card-body card-body btn btn-info btn-rounded" style="background-color: rgb(5, 11, 88)">
                 <h5 class="card-title">Total Orders</h5>
-                <p class="card-text">null</p>
-              </div>
+                <p class="card-text">{{$orders}}</p>
+              </button>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3 mb-3">
-            <div class="card" style="background-color: #01FFFF;">
-              <div class="card-body">
+            <div class="card" style="background-color: #04ffff;">
+              <button class="card-body card-body btn btn-info btn-rounded" style="background-color: rgb(5, 11, 88)">
                 <h5 class="card-title">Total Revenue</h5>
                 <p class="card-text">null</p>
-              </div>
+              </button>
             </div>
           </div>
           <div class="col-sm-6 col-lg-3 mb-3">
-            <div class="card" style="background-color: #FF9248;">
-              <div class="card-body">
-                <h5 class="card-title">Total Customers</h5>
-                <p class="card-text">{{$users}}</p>
-              </div>
+            <div class="card">
+              <button class="card-body btn btn-info btn-rounded"style="background-color: rgb(5, 11, 88)">
+                <h5 class="card-title" style="color: white">Total Customers</h5>
+                <p class="card-text" style="color: white">{{$users}}</p>
+              </button>
             </div>
           </div> 
           <div class="col-sm-6 col-lg-3 mb-3">
-            <div class="card" style="background-color:#00FF7F;;">
-              <div class="card-body">
-                <h5 class="card-title">Customer Satisfaction</h5>
-                <p class="card-text">null</p>
-              </div>
+            <div class="card">
+              <button class="card-body btn btn-info btn-rounded"style="background-color: rgb(5, 11, 88)">
+                <h5 class="card-title" style="color: white">Customer Satisfaction</h5>
+                <p class="card-text" style="color: white">null</p>
+              </button>
             </div>
           </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-lg-3 md-3">
-                <!-- Empty ***************-->
-            </div>
-            <div class="col-sm-6 col-lg-3 md-3">
-                <div class="card" style="background-color: #FFF77D;">
-                    <div class="card-body">
-                       <h5 class="card-title">Takeaway</h5>
-                        <p class="card-text">null</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 md-3">
-                <div class="card" style="background-color: #FFD2D3;">
-                    <div class="card-body">
-                       <h5 class="card-title">Dine in</h5>
-                        <p class="card-text">null</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 md-3">
-                  <!-- Empty ***************-->
+          <div class="col-sm-6 col-lg-3 md-3">
+            <!-- Empty ***************-->
+          </div>
+          <div class="col-sm-6 col-lg-3 md-3">
+            <div class="card">
+              <button class="card-body btn btn-success btn-rounded" style="background-color:#413D3E">
+                <h5 class="card-title">Takeaway</h5>
+                <p class="card-text">{{$takeawayOrdersCount}}</p>
+              </button>
             </div>
           </div>
-          
+          <div class="col-sm-6 col-lg-3 md-3">
+            <div class="card">
+              <button class="card-body btn btn-success btn-rounded" style="background-color: #413D3E">
+                <h5 class="card-title">Dine in</h5>
+                <p class="card-text">{{$DineInOrdersCount}}</p>
+              </button>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3 md-3">
+            <!-- Empty ***************-->
+          </div>
+        </div>
       </section>
       
+    
 
       <footer class="footer" style="margin-top:200px; background:black;">
         <div class="container">

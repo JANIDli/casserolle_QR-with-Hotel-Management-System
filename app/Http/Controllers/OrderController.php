@@ -100,4 +100,10 @@ class OrderController extends Controller
     {
         //
     }
+
+    // public function save(Request $request){
+
+    //     Order::create($request->all());
+    //     return view('order.orders');
+    // }
 }

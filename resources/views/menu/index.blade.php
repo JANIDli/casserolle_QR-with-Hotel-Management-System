@@ -43,7 +43,7 @@ integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI
 						<ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                               <a class="nav-link" href="#">
-                               <a href="cartTast" type="button"> <i class="fa fa-shopping-cart" style="color:rgb(255, 0, 128); "></i></a>
+                               <a href="{{ url('/cartTast') }}" type="button"> <i class="fa fa-shopping-cart" style="color:rgb(255, 0, 128); "></i></a>
                               </a>
                             </li>
                           </ul>

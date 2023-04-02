@@ -586,7 +586,24 @@ section
 .home_title
 {
 	margin-top: 10px;
+    opacity: 0;
+    animation: slideTop 1s ease forwards;
+    animation-delay: 1s;
 }
+@keyframes slideTop{
+    0%{
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+
+
 .home_title h1
 {
 	font-size: 72px;
@@ -708,6 +725,9 @@ section
 .intro_image img
 {
 	max-width: 100%;
+}
+.intro_image:hover{
+	transform: scale(1.1);
 }
 .intro_content
 {

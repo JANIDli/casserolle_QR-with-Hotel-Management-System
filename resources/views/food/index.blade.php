@@ -65,7 +65,6 @@
 						<p>RS.<span class="price text-danger ml-2">{{ $food->price }}.00/=</span></p>
 						<div class="mt-4">
 							<a href="/cart/new/{{$food->id}}" class="cart-btn">Add To Cart <i class="fa-solid fa-cart-shopping ml-2"></i></a>
-							<a href="#" class="order-btn ml-2">Order Now <i class="fa-solid fa-bowl-food"></i></a>
 						</div>
 					</div>
 

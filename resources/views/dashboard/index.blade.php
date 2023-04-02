@@ -36,7 +36,7 @@
     
     <!-- Header -->
 
-    <header class="header">
+    <header class="header" >
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -46,7 +46,7 @@
                         </div>
                         <nav class="main_nav" id="navpil">
                             <ul class="d-flex flex-row align-items-center justify-content-start nav nav-pills">
-                                <li><a href="index.html">home</a></li>
+                                <li><a href="{{url('/dashboard')}}">home</a></li>
                                 <li><a href="#about">about us</a></li>
                                 <li><a href="menu">menu</a></li>
                                 <li><a href="#contact">Contact</a></li>
@@ -56,7 +56,7 @@
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                               <a class="nav-link" href="#">
-                                <i class="fa fa-shopping-cart" style="color:rgb(255, 0, 128); "></i>
+                               <a href="{{ url('/cartTast') }}" type="button"> <i class="fa fa-shopping-cart" style="color:rgb(255, 0, 128); "></i></a>
                               </a>
                             </li>
                           </ul>
@@ -68,7 +68,7 @@
 
     <!-- Hamburger -->
     
-    <div class="hamburger_bar trans_400 d-flex flex-row align-items-center justify-content-start">
+    <div class="hamburger_bar trans_400 d-flex flex-row align-items-center justify-content-start"id="Home">
         <div class="hamburger">
             <div class="menu_toggle d-flex flex-row align-items-center justify-content-start">
                 <span>menu</span>
@@ -89,7 +89,7 @@
         <div class="menu_content d-flex flex-column align-items-center justify-content-center text-center">
             <ul>
             <li><a href="index.html">home</a></li>
-                                <li><a href="#">about us</a></li>
+                                <li><a href="home">about us</a></li>
                                 <li><a href="menu">menu</a></li>
                                 <li><a href="contact">Contact</a></li>
                                 <li><a href="#">Review</a></li>
@@ -102,7 +102,7 @@
     
     <!-- Home -->
 
-    <div class="home">
+    <div class="home" >
         <div class="parallax_background parallax-window" data-parallax="scroll" data-image-src="images/home.jpg" data-speed="0.8"></div>
         <div class="home_container">
             <div class="container">
@@ -159,7 +159,7 @@
         </div>
 
         <div id="contact" class="container-fluid bg-grey">
-        <div class="row">
+        <div class="row" style="display: flex; justify-content:center; padding-top:150px;" >
             <div class="col-sm-5">
             <p>Contact us and we'll get back to you within 24 hours.</p>
             <p><span class="glyphicon glyphicon-map-marker"></span> Anuradhapura</p>
@@ -168,7 +168,7 @@
             </div>
         
             <div class="col-sm-7 slideanim">
-        <form action="/contact" method="POST">
+        <form action="/contact" method="POST"  style="padding: 50px">
             
             <div class="row">
                 <div class="col-sm-6 form-group">

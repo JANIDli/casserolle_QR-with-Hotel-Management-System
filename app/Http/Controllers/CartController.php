@@ -56,7 +56,11 @@ class CartController extends Controller
                     $order ->product_id =$data->product_id;
                     $order ->save();
 
-                    
+                    // $cart_id=$data->id;
+                    // $cart=CartItem::find($cart_id); /// Deleting  Cart Iteam 
+                    // $cart->delete();
+
+             
 
                 }
                 //dd($data);
