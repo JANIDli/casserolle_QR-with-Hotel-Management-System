@@ -27,64 +27,14 @@
       .logo{
         margin-left: 30px;
       }
+      .header h3{
+        text-align: center;
+      }
     </style>
 </head>
 <body>
-  <div class="container">
+  
     
- 
-    <!-- *******************************************MODAL ***********************-->
-    <div class="modal fade" id="table" role="dialog">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Table NO:</h4>
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Payment Type</h4>
-          </div>
-          <div class="modal-body">
-            <p><b>Name    </b>:</p>
-            <p> <b> Number :</b></p>
-            <br>
-            <h5> <b> Order Detailes</b> </h5>
-            <table class="table table-sm">
-              <thead>
-                <tr>
-                  <th>Dish Name</th>
-                  <th> Pricce</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Dish  01</td>
-                  <td>Rs : 1000</td>
-                 
-                </tr>
-                <tr>
-                  <td>Dish 02</td>
-                  <td>Rs : 500</td>
-
-                </tr>
-                <tr>
-                  <td>Total</td>
-                  <td>Rs : 1000</td>
-
-                </tr>
-              </tbody>
-            </table>
-            
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger btn-lg" data-dismiss="modal" style="margin-right: 180px; width:250px;">Reject</button>
-
-            <button type="button" class="btn btn-success btn-lg" data-dismiss="modal" style="margin-right: 40px; width:250px;">Accept</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- Start NAV BAR*****************************-->
 
@@ -125,41 +75,293 @@
 
       <div class="container"> 
                     <div class="row" style="margin-left:x; margin-top:40px;;">
-                        <div class="col-sm-3">
-                            <button type="button" class="btn text-white btn-lg" data-toggle="modal" data-target="#table" style="width: 250px; height: 60px;background-color: #55acee;">Table 01</button>
-                        </div>
-                        <div class="col-sm-3">
-                          <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;">Table 02</button>
-                        </div>
-                        <div class="col-sm-3">
-                          <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;">Table 03</button>
-                        </div>
-                        <div class="col-sm-3">
-                          <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;">Table 04</button>
-                        </div>
+                      <div class="col-sm-3">
+                        @foreach($finishOrders as $finishOrder)
+                            @if($finishOrder->table_number == 1)
+                                <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                            
+                                <!-- Modal -->
+                                <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Customer Name:</p>
+                                                <p>Dish Name:{{$finishOrder->cart_items}}</p>
+                                                <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                                <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Finish Order</button>
+                                                <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
-
-                    <!-- Button seconde line  start***************************************************************** -->
-
+                    
+                    <div class="col-sm-3">
+                      @foreach($finishOrders as $finishOrder)
+                          @if($finishOrder->table_number == 2)
+                              <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                          
+                              <!-- Modal -->
+                              <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <p>Customer Name:</p>
+                                              <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                              <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                              <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                                  @csrf
+                                                  @method('DELETE')
+                                              </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          @endif
+                      @endforeach
+                  </div>
+                  
+                  <div class="col-sm-3">
+                    @foreach($finishOrders as $finishOrder)
+                        @if($finishOrder->table_number == 3)
+                            <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Customer Name:</p>
+                                            <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                            <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                            <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                
+                <div class="col-sm-3">
+                  @foreach($finishOrders as $finishOrder)
+                      @if($finishOrder->table_number == 1)
+                          <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                      
+                          <!-- Modal -->
+                          <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <p>Customer Name:</p>
+                                          <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                          <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                          <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                              @csrf
+                                              @method('DELETE')
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      @endif
+                  @endforeach
+              </div>
+              
+            </div>
+            
 
                     <div class="row" style="margin-left:x; margin-top:40px;;">
                       <div class="col-sm-3">
-                          <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;">Table 05</button>
-                      </div>
-                      <div class="col-sm-3">
-                        <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;">Table 06</button>
-                      </div>
-                      <div class="col-sm-3">
-                        <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;">Table 07</button>
-                      </div>
-                      <div class="col-sm-3">
-                        <button type="button" class="btn btn-success btn-lg" style="width: 250px; height: 60px;">Takerway </button>
-                      </div>
+                        @foreach($finishOrders as $finishOrder)
+                            @if($finishOrder->table_number == 5)
+                                <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                            
+                                <!-- Modal -->
+                                <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Customer Name:</p>
+                                                <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                                <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                                <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    
+                    <div class="col-sm-3">
+                      @foreach($finishOrders as $finishOrder)
+                          @if($finishOrder->table_number == 6)
+                              <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                          
+                              <!-- Modal -->
+                              <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                              <p>Customer Name:</p>
+                                              <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                              <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                              <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                                  @csrf
+                                                  @method('DELETE')
+                                              </form>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          @endif
+                      @endforeach
                   </div>
+                  
+                  <div class="col-sm-3">
+                    @foreach($finishOrders as $finishOrder)
+                        @if($finishOrder->table_number == 7)
+                            <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                        
+                            <!-- Modal -->
+                            <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Customer Name:</p>
+                                            <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                            <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                            <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                
+                <div class="col-sm-3">
+                  @foreach($finishOrders as $finishOrder)
+                      @if($finishOrder->table_number == 0)
+                          <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                      
+                          <!-- Modal -->
+                          <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <p>Customer Name:</p>
+                                          <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                          <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                          <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                              @csrf
+                                              @method('DELETE')
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      @endif
+                  @endforeach
+              </div>
 
-                  <!--  Earning buttun strat ******************************************** -->
+               <div class="col-sm-3">
+                  @foreach($finishOrders as $finishOrder)
+                      @if($finishOrder->table_number == 0)
+                          <button type="button" class="btn text-white btn-lg" style="width: 250px; height: 60px;background-color: #55acee;" data-toggle="modal" data-target="#table{{ $finishOrder->table_number }}">Table {{ $finishOrder->table_number }}</button>
+                      
+                          <!-- Modal -->
+                          <div class="modal fade" id="table{{ $finishOrder->table_number }}" tabindex="-1" role="dialog" aria-labelledby="table{{ $finishOrder->table_number }}Label" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                      <div class="modal-header">
+                                          <h5 class="modal-title" id="table{{ $finishOrder->table_number }}Label">Table {{ $finishOrder->table_number }} Order Details</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                          </button>
+                                      </div>
+                                      <div class="modal-body">
+                                          <p>Customer Name:</p>
+                                          <p>Total Amount: ${{ $finishOrder->total }}</p>
+                                          <button type="button" class="btn btn-primary" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                                          <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                                              @csrf
+                                              @method('DELETE')
+                                          </form>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      @endif
+                  @endforeach
+              </div>
 
-
+              
+          `</div>
+          
                   <div class="row" style="margin-left:x; margin-top:40px;;">
                     <div class="col-sm-3">
                       <!-- Empty Grid -->
@@ -173,17 +375,58 @@
                      <!-- Empty Grid -->
                     </div>
                    
-                </div>
-
-                  
+                </div>            
       </div>
+<br>
+<br>
+<br>
+<div class="header">
+  <h3 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" >Takeaway Order</h3>
+</div>
+      <div class="container-fluid text-center">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Food</th>
+                    <th scope="col">total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($finishOrders as $finishOrders)
+                <tr>
+                    <td>{{ $finishOrders->id }}</td>
+                    <td>{{ $finishOrders->comment }}</td>
+                    <td>{{ $finishOrders->cart_items }}</td>
+                    <td>{{ $finishOrders->total }}</td>
+                  <td> <button type="button" class="btn btn-success" onclick="event.preventDefault(); document.getElementById('complete-order-form-{{ $finishOrder->id }}').submit();">Complete Order</button>
+                    <form id="complete-order-form-{{ $finishOrder->id }}" action="{{ route('finish-orders.delete', ['id' => $finishOrder->id]) }}" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form></td>
+                   
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    
       <footer class="footer" style="margin-top:50px;">
         <div class="container">
           <span class="text-muted" style="margin-left: 465px;">© 2023 Alankulama casserole</span>
         </div>
       </footer>
       
-      
+      <script>
+  function displayPopup(customerName, totalAmount) {
+    var popup = window.open('', 'popup', 'width=300,height=200');
+    popup.document.write('<h2>Customer Name: ' + customerName + '</h2>');
+    popup.document.write('<h2>Total Amount: ' + totalAmount + '</h2>');
+    popup.focus();
+  }
+</script>
       
 </body>
 </html>

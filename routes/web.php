@@ -11,7 +11,8 @@ use App\Http\Controllers\TotaluserController;
 use App\Http\Controllers\AdminNewController;
 use App\Http\Controllers\JaniController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\CashierController;
+use App\Http\Controllers\ChefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,19 @@ Route::group(['namespace' => 'App\Http\Controllers'], function(){
     //ORDER
     Route::post('/order/new','OrderController@store');
     Route::get('/orders','OrderController@orders');
+
+
+    Route::get('/chef','ChefController@index');
+    // Route::get('/chef/accept-order/{id}', 'ChefController@acceptOrder')->name('chef.acceptOrder');
+    // Route::put('/orders/{id}/complete', 'ChefController@completeOrder')->name('chef.complete');
+
+    Route::post('/orders/{order}/accept', [ChefController::class, 'accept'])->name('orders.accept');
+    Route::post('/orders/{order}/complete', [ChefController::class, 'complete'])->name('orders.complete');
+    
+    Route::get('/cashier','CashierController@index');
+
+    Route::delete('/finish-orders/{id}', 'CashierController@delete')->name('finish-orders.delete');
+
 
     //CHECKOUT
     //Route::get('/checkout')
@@ -135,9 +149,9 @@ Route::prefix('google')->name('google.')->group( function(){
 
 
 //for cashier dashboad
-Route::get('/cashier',function(){
-    return view('cashier.index');
-});
+// Route::get('/cashier',function(){
+//     return view('cashier.index');
+// });
 //for admin_P dashboard
                         // Route::get('/admin',function(){
                         //     return view('Admin_P.Admin_P');
@@ -146,3 +160,5 @@ Route::get('/cashier',function(){
 Route::get('/product',function(){
     return view('product.product');
 });
+
+

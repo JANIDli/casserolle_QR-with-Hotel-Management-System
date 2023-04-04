@@ -106,4 +106,12 @@ class OrderController extends Controller
     //     Order::create($request->all());
     //     return view('order.orders');
     // }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
+
+

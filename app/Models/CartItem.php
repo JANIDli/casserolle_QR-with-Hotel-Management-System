@@ -13,4 +13,6 @@ class CartItem extends Model
         'product_id',
         'product_name',
     ];
+
+    
 }
